@@ -1,0 +1,69 @@
+How to use terraform to create an ec2 instance
+
+prerequiste 
+install terraform with powershell or download
+install AWS CLI( you can check "AWS-CLI.txt" on this repo for step by step procedure to install AWS CLI )
+install any text editor eg "VS code or sublime"
+install git bash or use powershell admin as terminal
+
+STEP 1
+create a folder on your desktop
+Create a file "fllename.tf" make sure you save the file with ".tf" as it extension  inside the folder
+copy this code to  into the filename.tf you created
+
+Afore you copy, edit the following info to your own aws account info 
+
+1. region
+2. ami (select ec2 on your console, select launch instance, select Amazon linux 2 and copy the ami id)
+3. availability zone
+4. vpc_security_group_id (create or use an existing security group copy the security group id from aws console)
+5. key name: create a keypair on your aws console
+6. use any name for name and project
+
+here is the code 
+
+
+provider "aws" {
+ region = "us-east-1"
+  # access_key = ""
+  # secret_key =""
+}
+
+resource "aws_instance" "trial" {
+    ami                    = "ami-0cff7528ff583bf9a"
+    instance_type          = "t2.micro"
+    availability_zone      = "us-east-1a"
+    key_name               = "terra"
+    vpc_security_group_ids =["sg-07561dcec1656f146"]
+    tags ={
+        Name    = "terraform-ec2"
+        Project = "ec2"
+    }
+}
+
+
+end of code
+
+STEP 2
+
+Go to your windows powershell admin or bash terminal
+navigate into the folder where you save filenmae.tf on powershell terminal or git bash
+run "aws --version" to be sure aws cli is installed
+run  "aws configure"
+paste your access key
+paste your secret key
+type the region you want eg "us-east-1"
+type "json" as default format
+
+STEP 3
+how to intialize terraform
+
+run "terraform init"
+note: it takes some min to intialize because it is installing some plugins
+run "terraform plan"
+run "terraform apply" this will make terraform to launch an ec2 instance 
+
+to cross check, go to your aws console, a new instance should be launch.
+
+to destroy the instance when you are done
+run "terraform destroy"
