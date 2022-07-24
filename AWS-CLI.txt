@@ -1,0 +1,31 @@
+ How to install AWS CLI on windows 10
+
+STEP 1
+Go to this url to download AWS CLI "https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html"
+Navigate to windows package 
+Download and run the AWS CLI MSI installer for Windows (64-bit)
+install the AWS CLI exe file downloaded
+
+STEP 2
+Go to your Windows powershell admin
+Run "aws --version" to check if aws cli is successfully installed
+if suuccessfully installed you will get this output
+"aws-cli/2.7.18 Python/3.9.11 Windows/10 exe/AMD64 prompt/off" (might differ depending on version installed)
+
+STEP 3
+go to your AWS ACCOUNT
+Click on your username at the top of the aws concole
+Select "security credentials"
+select create access key
+select generate access key and secret key
+download your access key/secret key
+
+STEP 4
+Go to your powershell
+type 'aws configure"
+paste your access key
+paste your secret key
+type the region you want eg "us-east-1"
+type "json" as default format
+you have succesfully configure AWS CLI
+To confirm run "aws iam list-users" to check the list of iam user on your AWS account
